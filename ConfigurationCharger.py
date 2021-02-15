@@ -1,18 +1,17 @@
 import io
 
-
 class ChargeConfigurationClass():    
 
     def __init__(self):
         self.WIDTH_SCREEN = 0
         self.HEIGHT_SCREEN = 0
-        self.TOTAL_BACKGROUND_STARS = 0
+        self.TOTAL_BACKGROUND_SURFACES = 0
         self.__listConfiguration = []
         
         self.ChargeConfiguration()
 
     def ChargeConfiguration(self):
-        configurationFile = io.open('configurationGame', 'r')
+        configurationFile = io.open('PyGameFirstGame\configurationGame', 'r')
         x = configurationFile.read().split('\n')
 
         for i in x: 
@@ -35,7 +34,7 @@ class ChargeConfigurationClass():
     def extractStarsBackground(self):
         for x in self.__listConfiguration:
             if str(x).startswith('TOTAL_BACKGROUND_STARS'):
-                self.TOTAL_BACKGROUND_STARS = int(x.split(':')[1])
+                self.TOTAL_BACKGROUND_SURFACES = int(x.split(':')[1])
 
     def GetHeightScreen(self):
         return self.HEIGHT_SCREEN
@@ -43,5 +42,5 @@ class ChargeConfigurationClass():
     def GetWidthScreen(self):
         return self.WIDTH_SCREEN
 
-    def GetTotalBackgroundStars(self):
-        return self.TOTAL_BACKGROUND_STARS
+    def GetTotalBackgroundSurfaces(self):
+        return self.TOTAL_BACKGROUND_SURFACES
