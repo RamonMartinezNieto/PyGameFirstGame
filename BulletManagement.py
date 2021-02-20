@@ -26,8 +26,6 @@ class Disparo:
                     x = self.listCoordinatesShoots[i][0] + self.correction_x
                     y = self.listCoordinatesShoots[i][1] - self.correction_y
 
-                    print("repaint", i, x, y)
-
                     C1 = random.uniform(20,255)
                     C2 = random.uniform(20,255)
                     C3 = random.uniform(20,255)

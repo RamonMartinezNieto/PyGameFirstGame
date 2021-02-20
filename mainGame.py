@@ -6,6 +6,8 @@ from CreateStars import CreateStarsInSeparateScreens
 from ConfigurationCharger import ChargeConfigurationClass
 from ShipMagamenet import PrincipalShip
 from BulletManagement import Disparo
+from Monster import Monster
+
 
 # Variables
 GameRunning = True
@@ -34,6 +36,10 @@ Stars.createRandomStars()
 Ship = PrincipalShip(Configuration)
 Shoot = Disparo(Configuration.GetShootSurface())
 
+#Create enemies 
+Enemy = Monster(Configuration)  
+
+
 
 def repaintAllelementsInTheScreen():
     screen.fill(black)
@@ -43,10 +49,12 @@ def repaintAllelementsInTheScreen():
     #Stars.repainStars()
     Ship.createShipt()
     Shoot.repainShoot()
+    Enemy.repaint_monsters()
 
 def checkMovementsAndExecuteIt(): 
     Ship.shipMovement()
     Shoot.moveShoots()
+    Enemy.monster_movement()
     if Shoot.canShoot():
         Ship.shipShooting(Shoot)
 

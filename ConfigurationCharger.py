@@ -85,3 +85,6 @@ class ChargeConfigurationClass():
 
     def GetShootSurface(self):
         return self.LIST_SURFACES[0]
+
+    def GetMonsterSurface(self):
+        return self.LIST_SURFACES[0]
