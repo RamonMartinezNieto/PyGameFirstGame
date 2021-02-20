@@ -1,22 +1,18 @@
 import pygame
 import random
+from pygame import draw
 
-from pygame.constants import K_a
 from CreateStars import CreateStarsInSeparateScreens
-from CreateSurfaces import createListOfSurfaces
 from ConfigurationCharger import ChargeConfigurationClass
-from CreatePrincipalShip import PrincipalShip
+from ShipMagamenet import PrincipalShip
+from BulletManagement import Disparo
 
 # Variables
-height_screen = 0
-width_screen = 0
-total_surfaces = 0
-listSurfaces = []
-listStars = []
 GameRunning = True
-
-# Colors
 black = (0,0,0,255)
+height_screen = 0 
+width_screen = 0 
+
 
 # Init PayGame 
 pygame.init()
@@ -24,45 +20,64 @@ fpsClock = pygame.time.Clock()
 
 # Charge configurations
 Configuration = ChargeConfigurationClass() 
-
 height_screen = Configuration.GetHeightScreen()
 width_screen = Configuration.GetWidthScreen()
-total_surfaces = Configuration.GetTotalBackgroundSurfaces()
 
-# Create screen and surfaces
+# Create screen
 screen = pygame.display.set_mode([width_screen,height_screen])
-listSurfaces = createListOfSurfaces(total_surfaces,width_screen,height_screen)
 
 # Stars for the background 
-myStars = CreateStarsInSeparateScreens(height_screen,width_screen,listSurfaces) 
-myStars.createRandomStars(total_surfaces)
-listStars = myStars.giveListStars()
+Stars = CreateStarsInSeparateScreens(Configuration)
+Stars.createRandomStars()
 
-# Create principal ship
-Ship = PrincipalShip(listSurfaces[0],height_screen,width_screen,5)
+# Create principal ship & Control Bullets
+Ship = PrincipalShip(Configuration)
+Shoot = Disparo(Configuration.GetShootSurface())
 
+
+def repaintAllelementsInTheScreen():
+    screen.fill(black)
+    Configuration.GetShootSurface().fill(black)
+    Configuration.GetShipSurface().fill(black)
+
+    #Stars.repainStars()
+    Ship.createShipt()
+    Shoot.repainShoot()
+
+def checkMovementsAndExecuteIt(): 
+    Ship.shipMovement()
+    Shoot.moveShoots()
+    if Shoot.canShoot():
+        Ship.shipShooting(Shoot)
+
+
+def blitAllElements(): 
+    screen.blit(Configuration.GetShootSurface(), (0,0))
+    screen.blit(Configuration.GetShipSurface(), (0,0))
+
+    for star in Stars.GetListStars():
+        screen.blit(star, (0,0))
+
+    
 
 # GameLoop
 while GameRunning:
+    
+    # Draw
+    repaintAllelementsInTheScreen()
 
-    # Background
-    screen.fill(black)
+    # Inputs and movements
+    checkMovementsAndExecuteIt()
 
-    # Ship Control
-    Ship.shipMovement()
-    Ship.shipShooting()
+    # Draw imagens "onto" anothers (blit)   
+    blitAllElements()
 
     # Exit game
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             GameRunning = False
-
-
-    # Static elements
-    for star in listStars:
-        screen.blit(star[2], (0,0))
-        
-
+    
+    
     #End Loop
     pygame.display.update()
     pygame.display.flip()
