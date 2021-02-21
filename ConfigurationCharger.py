@@ -1,6 +1,6 @@
 import io
-import pygame
-
+from pygame import Surface
+from pygame import SRCALPHA
 class ChargeConfigurationClass():    
 
     def __init__(self):
@@ -30,6 +30,7 @@ class ChargeConfigurationClass():
         self.TOTAL_BACKGROUND_STARS = self._extractAttributeInt('TOTAL_BACKGROUND_STARS')
         self.STARS_PER_SURFACE = self._extractAttributeInt('STARS_PER_SURFACE')
 
+
     def _extractAttributeInt(self,string_attribute):
         parameter = 0
         
@@ -51,7 +52,7 @@ class ChargeConfigurationClass():
             raise Exception('No more than 30 surfaces is allowed')
     
         for i in range(total_surfaces):
-            self.LIST_SURFACES.append(pygame.Surface((self.WIDTH_SCREEN,self.HEIGHT_SCREEN), pygame.SRCALPHA))
+            self.LIST_SURFACES.append(Surface((self.WIDTH_SCREEN,self.HEIGHT_SCREEN), SRCALPHA))
 
 
     ### GETTERS 
@@ -74,17 +75,8 @@ class ChargeConfigurationClass():
         return self.LIST_SURFACES
 
     # Surfaces
-    # 0 - Ship
-    # 1 - Shoots 
-    # 2 - Enemies
     def GetStarsSurfaces(self): 
         return self.LIST_SURFACES[self.RESERVED_SURFACES:]
 
-    def GetShipSurface(self):
-        return self.LIST_SURFACES[0]
-
-    def GetShootSurface(self):
-        return self.LIST_SURFACES[0]
-
-    def GetMonsterSurface(self):
+    def get_principal_surface(self):
         return self.LIST_SURFACES[0]

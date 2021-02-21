@@ -1,7 +1,4 @@
-
 import pygame
-import random
-from pygame import draw
 
 from CreateStars import CreateStarsInSeparateScreens
 from ConfigurationCharger import ChargeConfigurationClass
@@ -31,32 +28,30 @@ Stars.createRandomStars()
 
 # Create principal ship & Control Bullets
 Ship = PrincipalShip(Configuration)
-BulletsManagement = BulletManagement(Configuration.GetShootSurface())
+BulletsManagement = BulletManagement(Configuration.get_principal_surface())
 
 #Create enemies 
 MonsterController = MonsterManager(Configuration)  
 
 
 
-def repaintAllelementsInTheScreen():
+def repaint_all_elements_in_screen():
     screen.fill(black)
-    Configuration.GetShootSurface().fill(black)
-    Configuration.GetShipSurface().fill(black)
-    Configuration.GetMonsterSurface().fill(black)
-
+    Configuration.get_principal_surface().fill(black)
     Ship.repaint_ship()
     MonsterController.repaint_monsters()
 
-def checkMovementsAndExecuteIt(): 
-    Ship.shipMovement()
+
+def check_movements_inputs_and_execute_it(): 
+    Ship.check_inputs_movement_ship()
     BulletsManagement.move_all_shoots()
     MonsterController.monster_movement()
 
-    if BulletsManagement.canShoot():
+    if BulletsManagement.can_shoot():
         Ship.shipShooting(BulletsManagement)
 
 
-def blitAllElements(): 
+def blit_all_elements(): 
     for surface_on_screen in Configuration.GetTotalSurfaces():
         screen.blit(surface_on_screen, (0,0))   
 
@@ -65,23 +60,20 @@ def blitAllElements():
 while GameRunning:
     
     # Draw
-    repaintAllelementsInTheScreen()
+    repaint_all_elements_in_screen()
 
     # Inputs and movements
-    checkMovementsAndExecuteIt()
-
+    check_movements_inputs_and_execute_it()
     
     #MonsterController.check_shoot_contact_monster(Shoot.get_shoots())
 
-
     # Draw imagens "onto" anothers (blit)   
-    blitAllElements()
+    blit_all_elements()
 
     # Exit game
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             GameRunning = False
-    
     
     #End Loop
     pygame.display.update()

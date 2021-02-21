@@ -1,4 +1,3 @@
-import pygame
 from Monsters.MonsterOne import MonsterOne
 from Monsters.MonsterTwo import MonsterTwo
 from Monsters.MonsterThree import MonsterThree
@@ -15,9 +14,9 @@ class MonsterManager():
     list_monsters = []
     direction_right = True
 
-    def __init__(self,config_class):
+    def __init__(self, config_class: ChargeConfigurationClass):
         self.config = config_class
-        self.surface = self.config.GetMonsterSurface()
+        self.surface = self.config.get_principal_surface()
         self.height_screen = self.config.GetHeightScreen() 
         self.width_screen = self.config.GetWidthScreen() 
         
@@ -27,7 +26,7 @@ class MonsterManager():
         for i in range(self.quanty_per_rows):
             for a in range(self.rows_monsters):
                 if a == 0:
-                    self.list_monsters.append(MonsterOne(10*((i*self.monster_scale)*1.5), 10*((a*self.monster_scale)*1.1), self.monster_scale, self.config))
+                    self.list_monsters.append(MonsterOne(10*((i*self.monster_scale)*1.5), 10*((a*self.monster_scale)*1.1), self.monster_scale,  self.config))
                 elif a == 1:
                     self.list_monsters.append(MonsterTwo(10*((i*self.monster_scale)*1.5),10*((a*self.monster_scale)*1.1),  self.monster_scale, self.config))
                 elif a == 2:
@@ -36,6 +35,9 @@ class MonsterManager():
                     self.list_monsters.append(MonsterFive(10*((i*self.monster_scale)*1.5), 10*((a*self.monster_scale)*1.1), self.monster_scale, self.config))
                 elif a == 4: 
                     self.list_monsters.append(MonsterFour(10*((i*self.monster_scale)*1.5), 10*((a*self.monster_scale)*1.1), self.monster_scale, self.config))
+
+    #def _create_new_monster(self,type,i,a):
+    #    self.list_monsters.append(MonsterFour(10*((i*self.monster_scale)*1.5), 10*((a*self.monster_scale)*1.1), self.monster_scale, self.config))
 
     def repaint_monsters(self): 
         for i in self.list_monsters:
@@ -83,9 +85,3 @@ class MonsterManager():
     def _move_all_monsters_left(self): 
         for i in range(len(self.list_monsters)):
             self.list_monsters[i].x -= self.monster_speed
-
-
-    # def check_shoot_contact_monster(self,shoots):
-    #     if len(shoots) > 0:
-    #         print(shoots[0][0], shoots[0][0]+10)
-            

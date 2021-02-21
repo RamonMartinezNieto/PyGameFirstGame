@@ -1,6 +1,12 @@
-import pygame
-import random
-import ConfigurationCharger
+#import pygame
+from pygame.draw import rect
+from pygame.key import get_pressed
+from pygame import K_a
+from pygame import K_LEFT
+from pygame import K_d
+from pygame import K_RIGHT
+from pygame import K_SPACE
+from ConfigurationCharger import ChargeConfigurationClass
 from Bullets.BulletManagement import BulletManagement
 
 class PrincipalShip: 
@@ -8,8 +14,8 @@ class PrincipalShip:
     start_w = 20 
     coordinates_ship = []
 
-    def __init__(self,Config):
-        self.surface = Config.GetShipSurface()
+    def __init__(self,Config: ChargeConfigurationClass):
+        self.surface = Config.get_principal_surface()
         self.height_screen = Config.GetHeightScreen() 
         self.width_screen = Config.GetWidthScreen() 
         self.speed = 5
@@ -18,18 +24,18 @@ class PrincipalShip:
         self.secondary_color = (158,194,228,255)
         self.color_ship = self.principal_color
 
-        self.saveCoordinatesShipt(self.start_w,self.height_screen-40)
+        self.save_coordinates_ship(self.start_w,self.height_screen-40)
         
-        self._createShipt(self.coordinates_ship[0][0],self.coordinates_ship[0][1],self.principal_color)
+        self._create_ship(self.coordinates_ship[0][0],self.coordinates_ship[0][1],self.principal_color)
 
         
-    def saveCoordinatesShipt(self,x,y):
+    def save_coordinates_ship(self,x,y):
         self.coordinates_ship.append([x,y])
 
     # Create principal ship
-    def _createShipt(self,x,y,color):  
-
-        pygame.draw.rect(self.surface, 
+    def _create_ship(self,x,y,color):  
+        
+        rect(self.surface, 
             color, 
             (x, y, 110, 25), 
             border_top_left_radius=5, 
@@ -37,13 +43,13 @@ class PrincipalShip:
             border_bottom_left_radius=2, 
             border_bottom_right_radius=2)
 
-        pygame.draw.rect(self.surface, 
+        rect(self.surface, 
             color, 
             (x + 30, y - 15, 50, 20), 
             border_top_left_radius=5, 
             border_top_right_radius=5)
 
-        pygame.draw.rect(self.surface, 
+        rect(self.surface, 
             color, 
             (x + 50, y - 25, 10, 10), 
             border_top_left_radius=60, 
@@ -51,29 +57,30 @@ class PrincipalShip:
             
 
     def repaint_ship(self): 
-        self._createShipt(self.coordinates_ship[0][0],self.coordinates_ship[0][1],self.principal_color)
+        self._create_ship(self.coordinates_ship[0][0],self.coordinates_ship[0][1],self.principal_color)
       
-    def shipMovement(self):
-        if pygame.key.get_pressed()[pygame.K_a] or pygame.key.get_pressed()[pygame.K_LEFT]:
+
+    def check_inputs_movement_ship(self):
+        if get_pressed()[K_a] or get_pressed()[K_LEFT]:
             if self._can_move_left():
                 self._move_ship_left()
 
-        if pygame.key.get_pressed()[pygame.K_d] or pygame.key.get_pressed()[pygame.K_RIGHT]:
+        if get_pressed()[K_d] or get_pressed()[K_RIGHT]:
             if self._can_move_right():
                 self._move_ship_right()
 
 
     def _move_ship_right(self):
         self.coordinates_ship[0][0] += self.speed
-        self._createShipt(self.coordinates_ship[0][0]-5,self.coordinates_ship[0][1],self.secondary_color)
-        self._createShipt(self.coordinates_ship[0][0],self.coordinates_ship[0][1],self.principal_color)
+        self._create_ship(self.coordinates_ship[0][0]-5,self.coordinates_ship[0][1],self.secondary_color)
+        self._create_ship(self.coordinates_ship[0][0],self.coordinates_ship[0][1],self.principal_color)
         
 
 
     def _move_ship_left(self):
         self.coordinates_ship[0][0] -= self.speed
-        self._createShipt(self.coordinates_ship[0][0]+5,self.coordinates_ship[0][1],self.secondary_color)
-        self._createShipt(self.coordinates_ship[0][0],self.coordinates_ship[0][1],self.principal_color)
+        self._create_ship(self.coordinates_ship[0][0]+5,self.coordinates_ship[0][1],self.secondary_color)
+        self._create_ship(self.coordinates_ship[0][0],self.coordinates_ship[0][1],self.principal_color)
         
 
 
@@ -90,6 +97,6 @@ class PrincipalShip:
             return False
         
             
-    def shipShooting(self, bullet_management):
-        if pygame.key.get_pressed()[pygame.K_SPACE]:
+    def shipShooting(self, bullet_management: BulletManagement):
+        if get_pressed()[K_SPACE]:
             bullet_management.create_new_shoot(self.coordinates_ship[0][0],self.coordinates_ship[0][1])

@@ -1,18 +1,18 @@
-import pygame
 import random
-import ConfigurationCharger
+from pygame.draw import circle
+from ConfigurationCharger import ChargeConfigurationClass
 
 class CreateStarsInSeparateScreens:
 
-    def __init__(self, Configuration):
+    def __init__(self, config: ChargeConfigurationClass):
         self.starsList = []
 
-        self.back_stars = Configuration.GetTotalBackgroundStars()
-        self.stars_per_surf = Configuration.GetStarsPerSurface()
-        self.quantity = Configuration.GetTotalBackgroundStars()
-        self.height = Configuration.GetHeightScreen()
-        self.widht = Configuration.GetWidthScreen()
-        self.surface_stars_list = Configuration.GetStarsSurfaces()
+        self.back_stars = config.GetTotalBackgroundStars()
+        self.stars_per_surf = config.GetStarsPerSurface()
+        self.quantity = config.GetTotalBackgroundStars()
+        self.height = config.GetHeightScreen()
+        self.widht = config.GetWidthScreen()
+        self.surface_stars_list = config.GetStarsSurfaces()
         
         print(self.surface_stars_list.count)
 
@@ -32,13 +32,13 @@ class CreateStarsInSeparateScreens:
 
     # This is only one star
     def createStar(self,H_random,W_random,surface):    
-        pygame.draw.circle(surface, (10,10,10,0), (W_random, H_random), 7)
-        pygame.draw.circle(surface, (25,25,25,40), (W_random, H_random), 6)
-        pygame.draw.circle(surface, (55,55,55,80), (W_random, H_random), 5)
-        pygame.draw.circle(surface, (100,100,100,130), (W_random, H_random), 4)
-        pygame.draw.circle(surface, (155,155,155,180), (W_random, H_random), 3)
-        pygame.draw.circle(surface, (222,222,222,220), (W_random, H_random), 2)
-        pygame.draw.circle(surface, (255,255,255,255), (W_random, H_random), 1)
+        circle(surface, (10,10,10,0), (W_random, H_random), 7)
+        circle(surface, (25,25,25,40), (W_random, H_random), 6)
+        circle(surface, (55,55,55,80), (W_random, H_random), 5)
+        circle(surface, (100,100,100,130), (W_random, H_random), 4)
+        circle(surface, (155,155,155,180), (W_random, H_random), 3)
+        circle(surface, (222,222,222,220), (W_random, H_random), 2)
+        circle(surface, (255,255,255,255), (W_random, H_random), 1)
 
     def GetListStars(self):
         list_surfaces = list(self.starsList[i][2] for i in range(len(self.starsList)))
