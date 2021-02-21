@@ -1,3 +1,4 @@
+
 import pygame
 import random
 from pygame import draw
@@ -6,8 +7,7 @@ from CreateStars import CreateStarsInSeparateScreens
 from ConfigurationCharger import ChargeConfigurationClass
 from ShipMagamenet import PrincipalShip
 from BulletManagement import Disparo
-from Monster import Monster
-
+from Monsters.MonsterManager import MonsterManager
 
 # Variables
 GameRunning = True
@@ -37,7 +37,7 @@ Ship = PrincipalShip(Configuration)
 Shoot = Disparo(Configuration.GetShootSurface())
 
 #Create enemies 
-Enemy = Monster(Configuration)  
+MonsterController = MonsterManager(Configuration)  
 
 
 
@@ -45,27 +45,26 @@ def repaintAllelementsInTheScreen():
     screen.fill(black)
     Configuration.GetShootSurface().fill(black)
     Configuration.GetShipSurface().fill(black)
+    Configuration.GetMonsterSurface().fill(black)
 
     #Stars.repainStars()
-    Ship.createShipt()
+    Ship.repaint_ship()
     Shoot.repainShoot()
-    Enemy.repaint_monsters()
+    MonsterController.repaint_monsters()
 
 def checkMovementsAndExecuteIt(): 
     Ship.shipMovement()
     Shoot.moveShoots()
-    Enemy.monster_movement()
+    MonsterController.monster_movement()
     if Shoot.canShoot():
         Ship.shipShooting(Shoot)
 
 
 def blitAllElements(): 
-    screen.blit(Configuration.GetShootSurface(), (0,0))
-    screen.blit(Configuration.GetShipSurface(), (0,0))
+    for surface_on_screen in Configuration.GetTotalSurfaces():
+        screen.blit(surface_on_screen, (0,0))
 
-    for star in Stars.GetListStars():
-        screen.blit(star, (0,0))
-
+    
     
 
 # GameLoop
@@ -91,4 +90,4 @@ while GameRunning:
     pygame.display.flip()
     fpsClock.tick(30)
 
-pygame.quit()
+pygame.quit()   

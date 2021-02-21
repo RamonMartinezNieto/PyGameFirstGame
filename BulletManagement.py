@@ -11,7 +11,7 @@ class Disparo:
         self.shootSpeed = 10
         self.delayShoot = 0
         self.correction_x = 50
-        self.correction_y = 36
+        self.correction_y = 40
   
     def createShoot(self,x,y):    
         self.delayShoot += 1
