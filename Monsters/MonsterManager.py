@@ -83,3 +83,9 @@ class MonsterManager():
     def _move_all_monsters_left(self): 
         for i in range(len(self.list_monsters)):
             self.list_monsters[i].x -= self.monster_speed
+
+
+    # def check_shoot_contact_monster(self,shoots):
+    #     if len(shoots) > 0:
+    #         print(shoots[0][0], shoots[0][0]+10)
+            

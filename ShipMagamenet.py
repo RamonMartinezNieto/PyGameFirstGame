@@ -1,7 +1,7 @@
 import pygame
 import random
 import ConfigurationCharger
-from BulletManagement import Disparo
+from Bullets.BulletManagement import BulletManagement
 
 class PrincipalShip: 
     
@@ -32,16 +32,16 @@ class PrincipalShip:
         pygame.draw.rect(self.surface, 
             color, 
             (x, y, 110, 25), 
-            border_top_left_radius=7, 
-            border_top_right_radius=7, 
+            border_top_left_radius=5, 
+            border_top_right_radius=5, 
             border_bottom_left_radius=2, 
             border_bottom_right_radius=2)
 
         pygame.draw.rect(self.surface, 
             color, 
             (x + 30, y - 15, 50, 20), 
-            border_top_left_radius=7, 
-            border_top_right_radius=7)
+            border_top_left_radius=5, 
+            border_top_right_radius=5)
 
         pygame.draw.rect(self.surface, 
             color, 
@@ -90,6 +90,6 @@ class PrincipalShip:
             return False
         
             
-    def shipShooting(self, shoot):
+    def shipShooting(self, bullet_management):
         if pygame.key.get_pressed()[pygame.K_SPACE]:
-            shoot.createShoot(self.coordinates_ship[0][0],self.coordinates_ship[0][1])
+            bullet_management.create_new_shoot(self.coordinates_ship[0][0],self.coordinates_ship[0][1])

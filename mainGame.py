@@ -6,15 +6,14 @@ from pygame import draw
 from CreateStars import CreateStarsInSeparateScreens
 from ConfigurationCharger import ChargeConfigurationClass
 from ShipMagamenet import PrincipalShip
-from BulletManagement import Disparo
+from Bullets.BulletManagement import BulletManagement
 from Monsters.MonsterManager import MonsterManager
 
-# Variables
+# Global (?) Variables
 GameRunning = True
 black = (0,0,0,255)
 height_screen = 0 
 width_screen = 0 
-
 
 # Init PayGame 
 pygame.init()
@@ -22,11 +21,9 @@ fpsClock = pygame.time.Clock()
 
 # Charge configurations
 Configuration = ChargeConfigurationClass() 
-height_screen = Configuration.GetHeightScreen()
-width_screen = Configuration.GetWidthScreen()
 
 # Create screen
-screen = pygame.display.set_mode([width_screen,height_screen])
+screen = pygame.display.set_mode([Configuration.GetWidthScreen(),Configuration.GetHeightScreen()])
 
 # Stars for the background 
 Stars = CreateStarsInSeparateScreens(Configuration)
@@ -34,7 +31,7 @@ Stars.createRandomStars()
 
 # Create principal ship & Control Bullets
 Ship = PrincipalShip(Configuration)
-Shoot = Disparo(Configuration.GetShootSurface())
+BulletsManagement = BulletManagement(Configuration.GetShootSurface())
 
 #Create enemies 
 MonsterController = MonsterManager(Configuration)  
@@ -47,25 +44,22 @@ def repaintAllelementsInTheScreen():
     Configuration.GetShipSurface().fill(black)
     Configuration.GetMonsterSurface().fill(black)
 
-    #Stars.repainStars()
     Ship.repaint_ship()
-    Shoot.repainShoot()
     MonsterController.repaint_monsters()
 
 def checkMovementsAndExecuteIt(): 
     Ship.shipMovement()
-    Shoot.moveShoots()
+    BulletsManagement.move_all_shoots()
     MonsterController.monster_movement()
-    if Shoot.canShoot():
-        Ship.shipShooting(Shoot)
+
+    if BulletsManagement.canShoot():
+        Ship.shipShooting(BulletsManagement)
 
 
 def blitAllElements(): 
     for surface_on_screen in Configuration.GetTotalSurfaces():
-        screen.blit(surface_on_screen, (0,0))
+        screen.blit(surface_on_screen, (0,0))   
 
-    
-    
 
 # GameLoop
 while GameRunning:
@@ -75,6 +69,10 @@ while GameRunning:
 
     # Inputs and movements
     checkMovementsAndExecuteIt()
+
+    
+    #MonsterController.check_shoot_contact_monster(Shoot.get_shoots())
+
 
     # Draw imagens "onto" anothers (blit)   
     blitAllElements()
