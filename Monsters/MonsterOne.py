@@ -1,4 +1,3 @@
-from pygame.draw import rect
 from Monsters.Monster import Monster 
 
 class MonsterOne(Monster): 
@@ -10,33 +9,30 @@ class MonsterOne(Monster):
         self.y = y
     
     def _draw_basic_monster(self):
-        s = self.monster_scale
-        x = self.x
-        y = self.y
 
-        rect(self.surface, self.color_monster, (x+(s*2), y, s,s))
-        rect(self.surface, self.color_monster, (x+(s*8), y, s,s))
+        # X start / y line / s heigh
+        self.draw_new_line(2,0,1)
+        self.draw_new_line(8,0,1)
 
-        rect(self.surface, self.color_monster, (x+(s*3), y+s, s,s))
-        rect(self.surface, self.color_monster, (x+(s*7), y+s, s,s))
+        self.draw_new_line(3,1,1)
+        self.draw_new_line(7,1,1)
 
-        rect(self.surface, self.color_monster, (x+(s*2), y+(s*2), s*7,s))
-        
-        rect(self.surface, self.color_monster, (x+(s), y+(s*3), s*9,s))
+        self.draw_new_line(2,2,7)
 
-        rect(self.surface, self.color_monster, (x, y+(s*4), s*3,s))
-        rect(self.surface, self.color_monster, (x+(s*4), y+(s*4), s*3,s))
-        rect(self.surface, self.color_monster, (x+(s*8), y+(s*4), s*3,s))
+        self.draw_new_line(1,3,9)
 
-        rect(self.surface, self.color_monster, (x, y+(s*5), s,s))
-        rect(self.surface, self.color_monster, (x+(s*2), y+(s*5), s*7,s))
-        rect(self.surface, self.color_monster, (x+(s*10), y+(s*5), s,s))
+        self.draw_new_line(0,4,3)
+        self.draw_new_line(4,4,3)
+        self.draw_new_line(8,4,3)
 
-        rect(self.surface, self.color_monster, (x, y+(s*6), s,s))
-        rect(self.surface, self.color_monster, (x+(s*2), y+(s*6), s,s))
-        rect(self.surface, self.color_monster, (x+(s*8), y+(s*6), s,s))
-        rect(self.surface, self.color_monster, (x+(s*10), y+(s*6), s,s))
+        self.draw_new_line(0,5,1)
+        self.draw_new_line(2,5,7)
+        self.draw_new_line(10,5,1)
 
-        rect(self.surface, self.color_monster, (x+(s*3), y+(s*7), s*2,s))
-        rect(self.surface, self.color_monster, (x+(s*6), y+(s*7), s*2,s))
-         
+        self.draw_new_line(0,6,1)
+        self.draw_new_line(2,6,1)
+        self.draw_new_line(8,6,1)
+        self.draw_new_line(10,6,1)
+
+        self.draw_new_line(3,7,2)
+        self.draw_new_line(6,7,2)

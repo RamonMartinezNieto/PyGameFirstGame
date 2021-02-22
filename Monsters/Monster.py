@@ -1,5 +1,6 @@
 from abc import abstractmethod
 from ConfigurationCharger import ChargeConfigurationClass
+from pygame.draw import rect
 
 class Monster(): 
 
@@ -18,6 +19,8 @@ class Monster():
 
     @abstractmethod
     def _draw_basic_monster(self):
-        pass
-        
-   
+        pass   
+
+    def draw_new_line(self,x,y,h):
+        s = self.monster_scale
+        rect(self.surface, self.color_monster, (self.x+(s*x), self.y+(s*y), s*h, s))

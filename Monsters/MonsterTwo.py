@@ -10,31 +10,28 @@ class MonsterTwo(Monster):
         self.y = y
 
     def _draw_basic_monster(self):
-        s = self.monster_scale
-        x = self.x
-        y = self.y
         
-        rect(self.surface, self.color_monster, (x+(s*5), y, s*2,s))
+        # X start / y line / s heigh
+        self.draw_new_line(5,0,2)
 
-        rect(self.surface, self.color_monster, (x+(s*4), y+s, s*4,s))
+        self.draw_new_line(4,1,4)
 
-        rect(self.surface, self.color_monster, (x+(s*3), y+(s*2), s*6,s))
+        self.draw_new_line(3,2,6)
         
-        rect(self.surface, self.color_monster, (x+(s*2), y+(s*3), s*2,s))
-        rect(self.surface, self.color_monster, (x+(s*5), y+(s*3), s*2,s))
-        rect(self.surface, self.color_monster, (x+(s*8), y+(s*3), s*2,s))
-
-        rect(self.surface, self.color_monster, (x+(s*2), y+(s*4), s*8,s))
-
-        rect(self.surface, self.color_monster, (x+(s*4), y+(s*5), s,s))
-        rect(self.surface, self.color_monster, (x+(s*7), y+(s*5), s,s))
-
-        rect(self.surface, self.color_monster, (x+(s*3), y+(s*6), s,s))
-        rect(self.surface, self.color_monster, (x+(s*5), y+(s*6), s*2,s))
-        rect(self.surface, self.color_monster, (x+(s*8), y+(s*6), s,s))
-
-        rect(self.surface, self.color_monster, (x+(s*2), y+(s*7), s,s))
-        rect(self.surface, self.color_monster, (x+(s*4), y+(s*7), s,s))
-        rect(self.surface, self.color_monster, (x+(s*7), y+(s*7), s,s))
-        rect(self.surface, self.color_monster, (x+(s*9), y+(s*7), s,s))
+        self.draw_new_line(2,3,2)
+        self.draw_new_line(5,3,2)
+        self.draw_new_line(8,3,2)
         
+        self.draw_new_line(2,4,8)
+        
+        self.draw_new_line(4,5,1)
+        self.draw_new_line(7,5,1)
+        
+        self.draw_new_line(3,6,1)
+        self.draw_new_line(5,6,2)
+        self.draw_new_line(8,6,1)
+
+        self.draw_new_line(2,7,1)
+        self.draw_new_line(4,7,1)
+        self.draw_new_line(7,7,1)
+        self.draw_new_line(9,7,1)
