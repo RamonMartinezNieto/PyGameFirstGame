@@ -10,7 +10,7 @@ class MonsterFour(Monster):
         self.y = y
     
     def _draw_basic_monster(self):
-
+        self.clear_list_rect()
         self.draw_new_line(5,0,2)
 
         self.draw_new_line(4,1,4)

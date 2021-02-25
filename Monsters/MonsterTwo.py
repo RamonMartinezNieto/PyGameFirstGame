@@ -1,4 +1,3 @@
-from pygame.draw import rect
 from Monsters.Monster import Monster
 
 class MonsterTwo(Monster): 
@@ -10,7 +9,7 @@ class MonsterTwo(Monster):
         self.y = y
 
     def _draw_basic_monster(self):
-        
+        self.clear_list_rect()
         # X start / y line / s heigh
         self.draw_new_line(5,0,2)
 

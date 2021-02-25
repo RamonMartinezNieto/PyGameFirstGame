@@ -1,6 +1,8 @@
+import random
 from pygame.draw import rect
 from pygame import Rect
-import random
+from Monsters.MonsterManager import MonsterManager
+
 
 class Bullet:
 
@@ -22,4 +24,17 @@ class Bullet:
         C3 = random.uniform(20,235)
         self.rect_bullet = Rect.move(self.rect_bullet,0,self._shootSpeed)
         rect(self.surface, (C1,C2,C3,255), self.rect_bullet)
+
+    def get_rect_of_bullet(self):
+        return self.rect_bullet
+
+
+    def check_bullet_contact(self,monsters_manager: MonsterManager):
+        for monster in monsters_manager.get_monster_gen():
+            if self.rect_bullet.colliderect(monster.get_rect_monster()):
+                print('contacto')
+                return True
+        
+        return False
+
                 

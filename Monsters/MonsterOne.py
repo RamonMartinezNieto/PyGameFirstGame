@@ -9,8 +9,9 @@ class MonsterOne(Monster):
         self.y = y
     
     def _draw_basic_monster(self):
-
-        # X start / y line / s heigh
+        self.clear_list_rect()
+        
+        # X start / y line / h heigh
         self.draw_new_line(2,0,1)
         self.draw_new_line(8,0,1)
 

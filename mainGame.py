@@ -2,9 +2,10 @@ import pygame
 
 from CreateStars import CreateStarsInSeparateScreens
 from ConfigurationCharger import ChargeConfigurationClass
-from ShipMagamenet import PrincipalShip
 from Bullets.BulletManagement import BulletManagement
 from Monsters.MonsterManager import MonsterManager
+from ShipMagamenet import PrincipalShip
+
 
 # Global (?) Variables
 GameRunning = True
@@ -33,14 +34,11 @@ BulletsManagement = BulletManagement(Configuration.get_principal_surface())
 #Create enemies 
 MonsterController = MonsterManager(Configuration)  
 
-
-
 def repaint_all_elements_in_screen():
     screen.fill(black)
     Configuration.get_principal_surface().fill(black)
     Ship.repaint_ship()
     MonsterController.repaint_monsters()
-
 
 def check_movements_inputs_and_execute_it(): 
     Ship.check_inputs_movement_ship()
@@ -65,7 +63,7 @@ while GameRunning:
     # Inputs and movements
     check_movements_inputs_and_execute_it()
     
-    #MonsterController.check_shoot_contact_monster(Shoot.get_shoots())
+    BulletsManagement.check_collider_bullet_contact(MonsterController)
 
     # Draw imagens "onto" anothers (blit)   
     blit_all_elements()
@@ -78,6 +76,6 @@ while GameRunning:
     #End Loop
     pygame.display.update()
     pygame.display.flip()
-    fpsClock.tick(30)
+    fpsClock.tick(60)
 
 pygame.quit()   
