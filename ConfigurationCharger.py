@@ -19,7 +19,7 @@ class ChargeConfigurationClass():
         self._createAllSurfaces()
 
     def _chargeConfiguration(self):
-        configurationFile = io.open('configurationGame', 'r')
+        configurationFile = io.open('resources\configurationGame', 'r')
         x = configurationFile.read().split('\n')
 
         for i in x: 

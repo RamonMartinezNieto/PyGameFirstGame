@@ -1,4 +1,6 @@
+from Score import ScorePlayer
 from Monsters.Monster import Monster 
+from Score import ScorePlayer
 
 class MonsterOne(Monster): 
 
@@ -8,6 +10,9 @@ class MonsterOne(Monster):
         self.x += x
         self.y += y
     
+    def take_damage_and_increase_score(self, score_object: ScorePlayer): 
+        score_object.increase_score(100)
+        
     def _draw_basic_monster(self):
         self.clear_list_rect()
         

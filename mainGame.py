@@ -6,6 +6,8 @@ from Bullets.BulletManagement import BulletManagement
 from Monsters.MonsterManager import MonsterManager
 from ShipMagamenet import PrincipalShip
 from TextInScreen.TextGeneratorOnScreen import TextoGenerico
+from Score import ScorePlayer
+
 
 # Global (?) Variables
 GameRunning = True
@@ -19,7 +21,9 @@ fpsClock = pygame.time.Clock()
 
 # Charge configurations
 Configuration = ChargeConfigurationClass() 
+CurrentScore = ScorePlayer()
 TextoGenericoBien = TextoGenerico(Configuration)
+CurrentScorePlayer = ScorePlayer()
 
 # Create screen
 screen = pygame.display.set_mode([Configuration.GetWidthScreen(),Configuration.GetHeightScreen()])
@@ -36,14 +40,13 @@ BulletsManagement = BulletManagement(Configuration.get_principal_surface())
 MonsterController = MonsterManager(Configuration)  
 
 
-
 def repaint_all_elements_in_screen():
     screen.fill(black)
     Configuration.get_principal_surface().fill(black)
     Ship.repaint_ship()
     MonsterController.repaint_monsters()
     TextoGenericoBien.paint_concrete_text('PlayerName')
-    TextoGenericoBien.paint_user_score("100")
+    TextoGenericoBien.paint_user_score(CurrentScorePlayer.get_score_like_string())
 
 def check_movements_inputs_and_execute_it(): 
     Ship.check_inputs_movement_ship()
@@ -70,7 +73,7 @@ while GameRunning:
     check_movements_inputs_and_execute_it()
     
     #Check colision between bullets and monsters
-    BulletsManagement.check_collider_bullet_contact(MonsterController)
+    BulletsManagement.check_collider_bullet_contact(MonsterController, CurrentScorePlayer)
 
     # Draw imagens "onto" anothers (blit)   
     blit_all_elements()
@@ -83,6 +86,6 @@ while GameRunning:
     #End Loopd
     pygame.display.update()
     pygame.display.flip()
-    fpsClock.tick(60)
+    fpsClock.tick(30)
 
 pygame.quit()   

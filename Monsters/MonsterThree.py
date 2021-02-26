@@ -1,5 +1,6 @@
 from pygame.draw import rect
 from Monsters.Monster import Monster 
+from Score import ScorePlayer
 
 class MonsterThree(Monster): 
 
@@ -9,6 +10,9 @@ class MonsterThree(Monster):
         self.x += x
         self.y += y
     
+    def take_damage_and_increase_score(self, score_object: ScorePlayer): 
+        score_object.increase_score(300)
+        
     def _draw_basic_monster(self):
         self.clear_list_rect()
         self.draw_new_line(3,0,1)

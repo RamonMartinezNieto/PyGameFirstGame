@@ -1,3 +1,4 @@
+from Score import ScorePlayer
 from Monsters.Monster import Monster
 from Monsters.MonsterOne import MonsterOne
 from Monsters.MonsterTwo import MonsterTwo
@@ -9,7 +10,7 @@ from ConfigurationCharger import ChargeConfigurationClass
 class MonsterManager(): 
 
     rows_monsters = 5
-    quanty_per_rows = 6
+    quanty_per_rows = 8
     monster_scale = 4
     monster_speed = 3
     list_monsters = []
@@ -113,7 +114,7 @@ class MonsterManager():
     def get_all_monster_gen(self): 
         return self.list_monsters
 
-    def destroy_monster(self,bye_monster: Monster):
+    def destroy_monster(self,bye_monster: Monster, score_player: ScorePlayer):
         index_row = 0 
         index_column = 0
         for i in range(len(self.list_monsters)):
@@ -121,9 +122,7 @@ class MonsterManager():
                 if self.list_monsters[i][j] == bye_monster:
                     index_row = i
                     index_column = j
-                    print(self.list_monsters[i][j])
 
-
-        bye_monster.take_damage()
+        bye_monster.take_damage_and_increase_score(score_player)
         del self.list_monsters[index_row][index_column]
         del bye_monster

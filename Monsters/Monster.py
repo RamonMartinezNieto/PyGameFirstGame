@@ -1,5 +1,7 @@
+from Score import ScorePlayer
 from abc import abstractmethod
 from ConfigurationCharger import ChargeConfigurationClass
+from Score import ScorePlayer
 from pygame.draw import rect
 
 class Monster(): 
@@ -22,6 +24,11 @@ class Monster():
     def _draw_basic_monster(self):
         pass   
 
+
+    @abstractmethod
+    def take_damage_and_increase_score(self, score_object: ScorePlayer): 
+        pass 
+    
     def clear_list_rect(self):
         self.list_rect_monster.clear()
 
@@ -36,6 +43,3 @@ class Monster():
 
     def get_rect_monster(self):
         return self.list_rect_monster
-
-    def take_damage(self): 
-        print('me has dado!')

@@ -1,3 +1,4 @@
+from Score import ScorePlayer
 from Bullets.Bullet import Bullet
 from Monsters.MonsterManager import MonsterManager
 
@@ -44,7 +45,7 @@ class BulletManagement:
         return self.list_bullets_shooted
 
 
-    def check_collider_bullet_contact(self,monsterController: MonsterManager):
+    def check_collider_bullet_contact(self,monsterController: MonsterManager, score_player: ScorePlayer):
         bullet_to_delete = None
         monster_to_destroy = None
         
@@ -58,4 +59,4 @@ class BulletManagement:
                         
         if bullet_to_delete != None:
             self.destroy_bullet(bullet_to_delete)
-            monsterController.destroy_monster(monster_to_destroy)
+            monsterController.destroy_monster(monster_to_destroy, score_player)
