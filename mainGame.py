@@ -45,7 +45,8 @@ def repaint_all_elements_in_screen():
     Configuration.get_principal_surface().fill(black)
     Ship.repaint_ship()
     MonsterController.repaint_monsters()
-    TextoGenericoBien.paint_concrete_text('PlayerName')
+    TextoGenericoBien.paint_player_text('PlayerName')
+    TextoGenericoBien.paint_concrete_text(str(Ship.lives_ship),0,Configuration.GetHeightScreen()-30)
     TextoGenericoBien.paint_user_score(CurrentScorePlayer.get_score_like_string())
 
 def check_movements_inputs_and_execute_it(): 
@@ -66,7 +67,7 @@ def shoot_controller():
     #Check colision between bullets and monsters
     BulletsManagement.check_collider_bullet_contact(MonsterController, CurrentScorePlayer)
     BulletsManagement.enemy_shooting_bullets(MonsterController)
-    
+    Ship.check_bullet_contact_monster_to_ship(BulletsManagement)
 
 # GameLoop
 while GameRunning:
@@ -90,6 +91,6 @@ while GameRunning:
     #End Loopd
     pygame.display.update()
     pygame.display.flip()
-    fpsClock.tick(30)
+    fpsClock.tick(60)
 
 pygame.quit()   

@@ -11,10 +11,12 @@ class TextoGenerico():
         self.width = configuration.GetWidthScreen()
         self.font = pygame.font.Font('resources///space_invaders.ttf', 24)
 
-    def paint_concrete_text(self,string):    
-        text = self.font.render(string, True, self.color_white)
-        self.surface.blit(text, (10,10))
+    def paint_player_text(self,string):
+        self.paint_concrete_text(string,10,10)    
     
     def paint_user_score(self,score): 
-        text = self.font.render(score, True, self.color_white)
-        self.surface.blit(text, (self.width-100,10))
+        self.paint_concrete_text(score,self.width-100,10)    
+
+    def paint_concrete_text(self,text,x,y):
+        text = self.font.render(text, True, self.color_white)
+        self.surface.blit(text, (x,y))

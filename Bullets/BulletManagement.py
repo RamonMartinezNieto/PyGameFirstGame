@@ -43,8 +43,7 @@ class BulletManagement:
             self.destroy_bullet(bullet)
 
     def __destroy_bullet_mosnter_depens_screen(self,bullet: Bullet): 
-        if bullet.rect_bullet.y >= 900:
-            print('destroy bullet')
+        if bullet.rect_bullet.y >= 820:
             self.destroy_bullet_monster(bullet)
 
 
@@ -74,7 +73,6 @@ class BulletManagement:
                         
                         
         if bullet_to_delete != None:
-            print('whaaaaaaaaaaaaaaaaaaat ')
             self.destroy_bullet(bullet_to_delete)
             monsterController.destroy_monster(monster_to_destroy, score_player)
 
@@ -89,10 +87,10 @@ class BulletManagement:
                 self.create_new_shoot_monster(x,y)
                 self.delay_between_shoots_monster = len(monsterController.list_monsters)*3
             except:
-                print('error')
                 pass
         else:
             self.delay_between_shoots_monster -= 1
+
             
         
     def move_all_enemy_shoots(self):

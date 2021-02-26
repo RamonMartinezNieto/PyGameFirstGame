@@ -1,7 +1,5 @@
-import random
 from pygame.draw import rect
 from pygame import Rect
-
 
 class BulletMonster:
 
@@ -23,12 +21,3 @@ class BulletMonster:
         return self.rect_bullet
 
 
-    # def check_bullet_contact(self,monsters_manager: MonsterManager):
-    #     for monster in monsters_manager.get_monster_gen():
-    #         if self.rect_bullet.colliderect(monster.get_rect_monster()):
-    #             print('contacto')
-    #             return True
-        
-    #     return False
-
-                
