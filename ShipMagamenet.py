@@ -121,17 +121,21 @@ class PrincipalShip:
             bullet_management.create_new_shoot(self.coordinates_ship[0][0],self.coordinates_ship[0][1])
 
     def check_bullet_contact_monster_to_ship(self, bullet_manager: BulletManagement):
+        end_game = False
         for rects in self.rect_list_ship:
             for bullet in bullet_manager.list_bullets_shooted_monsters:
                 if rects.colliderect(bullet.rect_bullet):
-                    self.damage_ship()
+                    end_game = not self.damage_ship()
                     bullet_manager.destroy_bullet_monster(bullet)
-                    return True
-        else: 
-            return False
+                    print(end_game)
+                    return end_game
+        
+        if end_game:
+            return end_game
 
     def damage_ship(self):
         if self.lives_ship > 0:
             self.lives_ship -= 1
+            return True
         else:
-            print('GAME OVER !!!!!!!')
+            return False

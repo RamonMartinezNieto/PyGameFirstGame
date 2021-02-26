@@ -11,6 +11,7 @@ from Score import ScorePlayer
 
 # Global (?) Variables
 GameRunning = True
+GameOver = False
 black = (0,0,0,255)
 height_screen = 0 
 width_screen = 0 
@@ -47,7 +48,7 @@ def repaint_all_elements_in_screen():
     Ship.paint_mini_ships()
     MonsterController.repaint_monsters()
     TextoGenericoBien.paint_player_text('PlayerName')
-    TextoGenericoBien.paint_concrete_text(str(Ship.lives_ship),10,Configuration.GetHeightScreen()-40)
+    TextoGenericoBien.paint_concrete_text(str(Ship.lives_ship),10,Configuration.GetHeightScreen()-40,24)
     TextoGenericoBien.paint_user_score(CurrentScorePlayer.get_score_like_string())
 
 def check_movements_inputs_and_execute_it(): 
@@ -65,24 +66,35 @@ def blit_all_elements():
         screen.blit(surface_on_screen, (0,0))   
 
 def shoot_controller(): 
+    global GameOver
+
     #Check colision between bullets and monsters
     BulletsManagement.check_collider_bullet_contact(MonsterController, CurrentScorePlayer)
     BulletsManagement.enemy_shooting_bullets(MonsterController)
-    Ship.check_bullet_contact_monster_to_ship(BulletsManagement)
+    if Ship.check_bullet_contact_monster_to_ship(BulletsManagement):
+        GameOver = True
+        
 
 # GameLoop
 while GameRunning:
 
-    # Draw
-    repaint_all_elements_in_screen()
+    if not GameOver:
+        # Draw
+        repaint_all_elements_in_screen()
 
-    # Inputs and movements
-    check_movements_inputs_and_execute_it()
-    
-    shoot_controller()
-    
+        # Inputs and movements
+        check_movements_inputs_and_execute_it()
+        
+        shoot_controller()
+        
+    else:
+        TextoGenericoBien.paint_concrete_text('GAME OVER',60,(Configuration.GetHeightScreen()//2)-40,80)
+
+
+
     # Draw imagens "onto" anothers (blit)   
     blit_all_elements()
+
 
     # Exit game
     for event in pygame.event.get():
@@ -93,5 +105,3 @@ while GameRunning:
     pygame.display.update()
     pygame.display.flip()
     fpsClock.tick(60)
-        
-pygame.quit()   
