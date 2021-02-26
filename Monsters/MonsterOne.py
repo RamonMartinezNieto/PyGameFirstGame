@@ -5,8 +5,8 @@ class MonsterOne(Monster):
     def __init__(self, x, y, monster_scale, config):
         Monster.__init__(self, config, monster_scale)
         self.color_monster = (0,0,255,255)
-        self.x = x
-        self.y = y
+        self.x += x
+        self.y += y
     
     def _draw_basic_monster(self):
         self.clear_list_rect()

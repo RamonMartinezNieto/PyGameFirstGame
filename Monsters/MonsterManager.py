@@ -54,22 +54,26 @@ class MonsterManager():
 
                 
     def _monster_movement_right(self):
-        monster = self._get_monster_more_close_to_screen('right')
-        if monster.x <= self.width_screen - 50 and self.direction_right:      
-            self._move_all_monsters_right()
-        elif monster.x >= self.width_screen - 50 and self.direction_right:
-            self._move_all_monsters_down()
-            self.direction_right = False 
-
+        try:
+            monster = self._get_monster_more_close_to_screen('right')
+            if monster.x <= self.width_screen - 50 and self.direction_right:      
+                self._move_all_monsters_right()
+            elif monster.x >= self.width_screen - 50 and self.direction_right:
+                self._move_all_monsters_down()
+                self.direction_right = False 
+        except:
+            pass
 
     def _monster_movement_left(self):
         monster = self._get_monster_more_close_to_screen('left')
-        if monster.x > 10 and not self.direction_right:
-            self._move_all_monsters_left()
-        elif not self.direction_right and monster.x >= 0: 
-            self._move_all_monsters_down()
-            self.direction_right = True 
-
+        try:
+            if monster.x > 0 and not self.direction_right:
+                self._move_all_monsters_left()
+            elif not self.direction_right and monster.x >= 0: 
+                self._move_all_monsters_down()
+                self.direction_right = True 
+        except:
+            pass
 
     def _get_monster_more_close_to_screen(self,slide):
         count_first = 0

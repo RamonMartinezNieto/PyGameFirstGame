@@ -9,7 +9,7 @@ class Monster():
         # Changed in subclases
         self.color_monster = (0,0,0,255)
         self.x = 0 
-        self.y = 0 
+        self.y = 40 
         self.list_rect_monster = []
 
         # Same for all subclases
@@ -17,7 +17,7 @@ class Monster():
         self.surface = config_class.get_principal_surface()
         self.height_screen = config_class.GetHeightScreen() 
         self.width_screen = config_class.GetWidthScreen() 
-    
+
     @abstractmethod
     def _draw_basic_monster(self):
         pass   
