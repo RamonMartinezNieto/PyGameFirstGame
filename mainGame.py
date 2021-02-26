@@ -44,9 +44,10 @@ def repaint_all_elements_in_screen():
     screen.fill(black)
     Configuration.get_principal_surface().fill(black)
     Ship.repaint_ship()
+    Ship.paint_mini_ships()
     MonsterController.repaint_monsters()
     TextoGenericoBien.paint_player_text('PlayerName')
-    TextoGenericoBien.paint_concrete_text(str(Ship.lives_ship),0,Configuration.GetHeightScreen()-30)
+    TextoGenericoBien.paint_concrete_text(str(Ship.lives_ship),10,Configuration.GetHeightScreen()-40)
     TextoGenericoBien.paint_user_score(CurrentScorePlayer.get_score_like_string())
 
 def check_movements_inputs_and_execute_it(): 
@@ -92,5 +93,5 @@ while GameRunning:
     pygame.display.update()
     pygame.display.flip()
     fpsClock.tick(60)
-
+        
 pygame.quit()   
