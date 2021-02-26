@@ -46,12 +46,16 @@ class BulletManagement:
 
     def check_collider_bullet_contact(self,monsterController: MonsterManager):
         bullet_to_delete = None
+        monster_to_destroy = None
+        
         for bullet in self.list_bullets_shooted:
             for i in monsterController.get_all_monster_gen():
                 for monster in i:
                     if bullet.rect_bullet.collidelistall(monster.get_rect_monster()):
-                        bullet_to_delete = bullet 
-                        monster.take_damage()
+                        bullet_to_delete = bullet
+                        monster_to_destroy = monster
+                        
                         
         if bullet_to_delete != None:
             self.destroy_bullet(bullet_to_delete)
+            monsterController.destroy_monster(monster_to_destroy)

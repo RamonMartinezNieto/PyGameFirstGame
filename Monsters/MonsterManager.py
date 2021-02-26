@@ -108,3 +108,18 @@ class MonsterManager():
 
     def get_all_monster_gen(self): 
         return self.list_monsters
+
+    def destroy_monster(self,bye_monster: Monster):
+        index_row = 0 
+        index_column = 0
+        for i in range(len(self.list_monsters)):
+            for j in range(len(self.list_monsters[i])):
+                if self.list_monsters[i][j] == bye_monster:
+                    index_row = i
+                    index_column = j
+                    print(self.list_monsters[i][j])
+
+
+        bye_monster.take_damage()
+        del self.list_monsters[index_row][index_column]
+        del bye_monster

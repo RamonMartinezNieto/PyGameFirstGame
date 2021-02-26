@@ -56,13 +56,13 @@ def blit_all_elements():
 
 # GameLoop
 while GameRunning:
-    
+      
     # Draw
     repaint_all_elements_in_screen()
 
     # Inputs and movements
     check_movements_inputs_and_execute_it()
-    
+     
     BulletsManagement.check_collider_bullet_contact(MonsterController)
 
     # Draw imagens "onto" anothers (blit)   

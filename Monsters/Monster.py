@@ -17,7 +17,7 @@ class Monster():
         self.surface = config_class.get_principal_surface()
         self.height_screen = config_class.GetHeightScreen() 
         self.width_screen = config_class.GetWidthScreen() 
-
+    
     @abstractmethod
     def _draw_basic_monster(self):
         pass   
