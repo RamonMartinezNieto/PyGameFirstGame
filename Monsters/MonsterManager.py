@@ -1,3 +1,4 @@
+import random 
 from Score import ScorePlayer
 from Monsters.Monster import Monster
 from Monsters.MonsterOne import MonsterOne
@@ -17,11 +18,12 @@ class MonsterManager():
     direction_right = True
 
     def __init__(self, config_class: ChargeConfigurationClass):
+
         self.config = config_class
         self.surface = self.config.get_principal_surface()
         self.height_screen = self.config.GetHeightScreen() 
         self.width_screen = self.config.GetWidthScreen() 
-        
+
         for i in range(self.rows_monsters):
             self.list_monsters.append([])
 

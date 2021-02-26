@@ -32,7 +32,6 @@ class Bullet:
     def check_bullet_contact(self,monsters_manager: MonsterManager):
         for monster in monsters_manager.get_monster_gen():
             if self.rect_bullet.colliderect(monster.get_rect_monster()):
-                print('contacto')
                 return True
         
         return False

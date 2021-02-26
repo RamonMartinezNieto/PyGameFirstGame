@@ -3,6 +3,7 @@ from abc import abstractmethod
 from ConfigurationCharger import ChargeConfigurationClass
 from Score import ScorePlayer
 from pygame.draw import rect
+import random 
 
 class Monster(): 
 

@@ -51,6 +51,7 @@ def repaint_all_elements_in_screen():
 def check_movements_inputs_and_execute_it(): 
     Ship.check_inputs_movement_ship()
     BulletsManagement.move_all_shoots()
+    BulletsManagement.move_all_enemy_shoots()
     MonsterController.monster_movement()
 
     if BulletsManagement.can_shoot():
@@ -61,10 +62,14 @@ def blit_all_elements():
     for surface_on_screen in Configuration.GetTotalSurfaces():
         screen.blit(surface_on_screen, (0,0))   
 
+def shoot_controller(): 
+    #Check colision between bullets and monsters
+    BulletsManagement.check_collider_bullet_contact(MonsterController, CurrentScorePlayer)
+    BulletsManagement.enemy_shooting_bullets(MonsterController)
+    
 
 # GameLoop
 while GameRunning:
-    
 
     # Draw
     repaint_all_elements_in_screen()
@@ -72,9 +77,8 @@ while GameRunning:
     # Inputs and movements
     check_movements_inputs_and_execute_it()
     
-    #Check colision between bullets and monsters
-    BulletsManagement.check_collider_bullet_contact(MonsterController, CurrentScorePlayer)
-
+    shoot_controller()
+    
     # Draw imagens "onto" anothers (blit)   
     blit_all_elements()
 
