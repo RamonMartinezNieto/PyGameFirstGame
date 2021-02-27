@@ -42,12 +42,12 @@ class GenericButton():
         texto_boton = TextoGenerico(self.screen,self.surface)
         texto_boton.paint_concrete_text(text,self.y + (self.height_button//2-h_correction),self.x + (self.width_button//2-w_correction),28)
 
-    def draw_button(self,color,y_correction=0,x_correction=0): 
+    def draw_button(self,color,y_correction=0,x_correction=0,correction_height=0): 
         #Background button
         return rect(
             self.surface, 
             color, 
-            (self.y-y_correction,self.x-x_correction,self.height_button,self.width_button),
+            (self.y-y_correction,self.x-x_correction,self.height_button+correction_height,self.width_button),
             border_radius=10)
 
     def draw_background_button(self,color):
@@ -71,5 +71,4 @@ class GenericButton():
     def click_button_play(self): 
         mouse = pygame.mouse.get_pos() 
         if self.y <= mouse[0] <= self.y+self.height_button and self.x <= mouse[1] <= self.x+self.width_button: 
-            print('presionado play')
             return True

@@ -1,4 +1,3 @@
-import random 
 from Score import ScorePlayer
 from Monsters.Monster import Monster
 from Monsters.MonsterOne import MonsterOne
@@ -24,6 +23,7 @@ class MonsterManager():
         self.height_screen = self.config.GetHeightScreen() 
         self.width_screen = self.config.GetWidthScreen() 
 
+        self.you_loss_the_game = False
         self.create_monster()
 
     def create_monster(self): 
@@ -100,7 +100,10 @@ class MonsterManager():
 
     def _move_all_monsters_down(self):
         for monster in self.get_monster_gen():
-            monster.y += (self.monster_speed*5)
+            if monster.y >= self.height_screen-150:
+                self.you_loss_the_game = True
+            else:
+                monster.y += (self.monster_speed*5)
 
 
     def _move_all_monsters_left(self): 
@@ -130,5 +133,17 @@ class MonsterManager():
         del bye_monster
 
     def reset_monsters(self): 
+        self.you_loss_the_game = False
         self.list_monsters.clear()
         self.create_monster()
+
+    def check_if_you_win(self): 
+        is_you_win = True
+        for i in self.get_all_monster_gen():
+            if len(i) > 0:
+                is_you_win = False
+        return is_you_win
+
+
+    def check_if_you_loss(self): 
+        return self.you_loss_the_game

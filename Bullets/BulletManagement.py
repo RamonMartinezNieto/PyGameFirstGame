@@ -85,12 +85,11 @@ class BulletManagement:
                 y = monsterController.list_monsters[index_row_monster][index_column_monster].y
 
                 self.create_new_shoot_monster(x,y)
-                self.delay_between_shoots_monster = len(monsterController.list_monsters)*3
+                self.delay_between_shoots_monster = len(monsterController.list_monsters)*4
             except:
                 pass
         else:
             self.delay_between_shoots_monster -= 1
-
             
         
     def move_all_enemy_shoots(self):

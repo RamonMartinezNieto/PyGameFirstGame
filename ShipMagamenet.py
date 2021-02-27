@@ -21,7 +21,7 @@ class PrincipalShip:
         self.rect_list_ship = []
         self.mini_ships = []
         self.start_w = ( self.width_screen // 2 ) - 55
-        self.lives_ship = 3
+        self.lives_ship = 300
         self.principal_color = (37,183,230,255)
         self.secondary_color = (158,194,228,255)
         self.color_ship = self.principal_color
@@ -127,7 +127,6 @@ class PrincipalShip:
                 if rects.colliderect(bullet.rect_bullet):
                     end_game = not self.damage_ship()
                     bullet_manager.destroy_bullet_monster(bullet)
-                    print(end_game)
                     return end_game
         
         if end_game:
@@ -139,3 +138,6 @@ class PrincipalShip:
             return True
         else:
             return False
+
+    def reset_ship(self): 
+        self.lives_ship = 3
