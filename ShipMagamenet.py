@@ -21,7 +21,7 @@ class PrincipalShip:
         self.rect_list_ship = []
         self.mini_ships = []
         self.start_w = ( self.width_screen // 2 ) - 55
-        self.lives_ship = 300
+        self.lives_ship = 3
         self.principal_color = (37,183,230,255)
         self.secondary_color = (158,194,228,255)
         self.color_ship = self.principal_color
