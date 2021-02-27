@@ -1,5 +1,5 @@
 import pygame
-
+import sys
 from CreateStars import CreateStarsInSeparateScreens
 from ConfigurationCharger import ChargeConfigurationClass
 from Bullets.BulletManagement import BulletManagement
@@ -7,7 +7,7 @@ from Monsters.MonsterManager import MonsterManager
 from ShipMagamenet import PrincipalShip
 from TextInScreen.TextGeneratorOnScreen import TextoGenerico
 from Score import ScorePlayer
-
+from Button import GenericButton
 
 # Global (?) Variables
 GameRunning = True
@@ -22,12 +22,14 @@ fpsClock = pygame.time.Clock()
 
 # Charge configurations
 Configuration = ChargeConfigurationClass() 
-CurrentScore = ScorePlayer()
-TextoGenericoBien = TextoGenerico(Configuration)
-CurrentScorePlayer = ScorePlayer()
 
 # Create screen
 screen = pygame.display.set_mode([Configuration.GetWidthScreen(),Configuration.GetHeightScreen()])
+
+CurrentScore = ScorePlayer()
+TextoGenericoBien = TextoGenerico(screen, Configuration.get_principal_surface())
+CurrentScorePlayer = ScorePlayer()
+ButtonsGenerator = GenericButton(Configuration.GetHeightScreen()//2,Configuration.GetWidthScreen()//2,"Botoncico",Configuration.get_principal_surface(),screen)
 
 # Stars for the background 
 Stars = CreateStarsInSeparateScreens(Configuration)
@@ -39,6 +41,15 @@ BulletsManagement = BulletManagement(Configuration.get_principal_surface())
 
 #Create enemies 
 MonsterController = MonsterManager(Configuration)  
+
+def reset_game(): 
+    global GameOver
+    GameOver = False
+    CurrentScore.reset_score_player()
+    #Stars.reset_stars()
+    #Ship.reset_ship()
+    BulletsManagement.reset_bullets()
+    MonsterController.reset_monsters()
 
 
 def repaint_all_elements_in_screen():
@@ -77,30 +88,38 @@ def shoot_controller():
 
 # GameLoop
 while GameRunning:
-
+    # Draw
+    repaint_all_elements_in_screen()
+    
     if not GameOver:
-        # Draw
-        repaint_all_elements_in_screen()
-
+        # Playing 
         # Inputs and movements
         check_movements_inputs_and_execute_it()
-        
+
         shoot_controller()
-        
+             
     else:
-        TextoGenericoBien.paint_concrete_text('GAME OVER',60,(Configuration.GetHeightScreen()//2)-40,80)
+        # Game Over Screen
+        #Background Text + GameOver Text
+        TextoGenericoBien.paint_concrete_text('GAME OVER',60,(Configuration.GetHeightScreen()//2)-145,78,(255,0,0,255))
+        TextoGenericoBien.paint_concrete_text('GAME OVER',60,(Configuration.GetHeightScreen()//2)-140,80)
 
-
+        if not ButtonsGenerator.check_button_hover():
+            ButtonsGenerator.new_button('Play')  
+        else: 
+            ButtonsGenerator.new_button('Play',5,5)
 
     # Draw imagens "onto" anothers (blit)   
     blit_all_elements()
-
 
     # Exit game
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             GameRunning = False
-    
+        if GameOver and event.type == pygame.MOUSEBUTTONDOWN:
+                if ButtonsGenerator.click_button_play():
+                    reset_game()
+
     #End Loopd
     pygame.display.update()
     pygame.display.flip()

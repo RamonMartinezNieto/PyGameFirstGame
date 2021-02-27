@@ -10,3 +10,6 @@ class ScorePlayer():
 
     def get_score_like_string(self):
         return str(self.score)
+
+    def reset_score_player(self):
+        self.score = 0

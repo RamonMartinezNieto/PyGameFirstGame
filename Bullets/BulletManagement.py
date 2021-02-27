@@ -97,3 +97,7 @@ class BulletManagement:
         for i in self.list_bullets_shooted_monsters:
             i.movement_shoot_monster()
             self.__destroy_bullet_mosnter_depens_screen(i)
+
+    def reset_bullets(self): 
+        self.list_bullets_shooted.clear()
+        self.list_bullets_shooted_monsters.clear()

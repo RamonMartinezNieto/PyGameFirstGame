@@ -24,12 +24,12 @@ class MonsterManager():
         self.height_screen = self.config.GetHeightScreen() 
         self.width_screen = self.config.GetWidthScreen() 
 
-        for i in range(self.rows_monsters):
-            self.list_monsters.append([])
-
         self.create_monster()
 
     def create_monster(self): 
+        for i in range(self.rows_monsters):
+            self.list_monsters.append([])
+
         for i in range(self.quanty_per_rows):
             for a in range(self.rows_monsters):
                 if a == 0:
@@ -128,3 +128,7 @@ class MonsterManager():
         bye_monster.take_damage_and_increase_score(score_player)
         del self.list_monsters[index_row][index_column]
         del bye_monster
+
+    def reset_monsters(self): 
+        self.list_monsters.clear()
+        self.create_monster()
