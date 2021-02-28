@@ -1,5 +1,4 @@
 import pygame
-import sys
 from CreateStars import CreateStarsInSeparateScreens
 from ConfigurationCharger import ChargeConfigurationClass
 from Bullets.BulletManagement import BulletManagement
@@ -113,8 +112,9 @@ while GameRunning:
 
         shoot_controller()
         
-        GameWin = MonsterController.check_if_you_win()
-        GameOver = MonsterController.check_if_you_loss()
+        if not GameOver:
+            GameWin = MonsterController.check_if_you_win()
+            GameOver = MonsterController.check_if_you_loss()
         
     elif GameWin: 
         button_play_win_and_game_over('   YOU WIN  ')

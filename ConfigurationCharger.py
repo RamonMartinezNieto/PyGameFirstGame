@@ -1,4 +1,5 @@
 import io
+from os import execlp
 from pygame import Surface
 from pygame import SRCALPHA
 class ChargeConfigurationClass():    
@@ -7,7 +8,7 @@ class ChargeConfigurationClass():
         self.__listConfigurationParameters = []
 
         #Init with default values
-        self.WIDTH_SCREEN = 500
+        self.WIDTH_SCREEN = 600
         self.HEIGHT_SCREEN = 800
         self.TOTAL_BACKGROUND_STARS = 20
         self.STARS_PER_SURFACE = 4
@@ -19,16 +20,21 @@ class ChargeConfigurationClass():
         self._createAllSurfaces()
 
     def _chargeConfiguration(self):
-        configurationFile = io.open('resources\configurationGame', 'r')
-        x = configurationFile.read().split('\n')
+        try:
+            configurationFile = io.open('resources\configurationGame', 'r')
+            x = configurationFile.read().split('\n')
 
-        for i in x: 
-            self.__listConfigurationParameters.append(i)
+            for i in x: 
+                self.__listConfigurationParameters.append(i)
+            
+            self.WIDTH_SCREEN = self._extractAttributeInt('WIDTH_SCREEN')
+            self.HEIGHT_SCREEN = self._extractAttributeInt('HEIGHT_SCREEN')
+            self.TOTAL_BACKGROUND_STARS = self._extractAttributeInt('TOTAL_BACKGROUND_STARS')
+            self.STARS_PER_SURFACE = self._extractAttributeInt('STARS_PER_SURFACE')
+        except:
+            pass
 
-        self.WIDTH_SCREEN = self._extractAttributeInt('WIDTH_SCREEN')
-        self.HEIGHT_SCREEN = self._extractAttributeInt('HEIGHT_SCREEN')
-        self.TOTAL_BACKGROUND_STARS = self._extractAttributeInt('TOTAL_BACKGROUND_STARS')
-        self.STARS_PER_SURFACE = self._extractAttributeInt('STARS_PER_SURFACE')
+
 
 
     def _extractAttributeInt(self,string_attribute):
